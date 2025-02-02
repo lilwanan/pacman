@@ -52,6 +52,8 @@ public class Tablero {
 				
 				char nuevaDir = sc.next().toUpperCase().charAt(0);
 				pac.cambiarDireccion(nuevaDir);
+				borrarMapa1();
+				mostrarLaberinto();
 				
 				
 				
@@ -79,7 +81,8 @@ public class Tablero {
 				
 				char nuevaDir = sc.next().toUpperCase().charAt(0);
 				pac.cambiarDireccion(nuevaDir);
-				
+				borrarMapa1();
+				mostrarLaberinto();
 				
 				
 			}
@@ -105,7 +108,8 @@ public class Tablero {
 				
 				char nuevaDir = sc.next().toUpperCase().charAt(0);
 				pac.cambiarDireccion(nuevaDir);
-				
+				borrarMapa1();
+				mostrarLaberinto();
 				
 				
 			}
@@ -121,7 +125,8 @@ public class Tablero {
 	public static void generarLaberinto() {
 		for(int i = 1; i<filas;i++) {
 			for (int j = 1; j<columnas;j++) {
-				matrTab[i][j] = " * ";
+				matrTab[i][j] = " *"
+						+ " ";
 				
 				
 				
@@ -352,6 +357,30 @@ public class Tablero {
 		Tablero.dificultad = dificultad;
 	}
 	
+	public static void borrarMapa1() {
+	    try {
+	        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public boolean comprobarColision(int x, int y) {
+	    return matrTab[x][y].equals(" F "); // Si la posición tiene un fantasma, devuelve true
+	}
+	
+	public boolean comprobarEstrellas() {
+		for(int i = 0 ; i<filas;i++) {
+			for(int j =0 ; j< columnas; j++) {
+				if(matrTab[i][j].equals(" * ")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
 	
 	
 	

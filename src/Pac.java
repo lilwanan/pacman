@@ -51,11 +51,21 @@ public class Pac implements Runnable {
 			return;
 		}
 		
+		if(tab.comprobarColision(nuevax, nuevay)) {
+			System.out.println("Perdiste!!");
+			System.exit(0);
+		}
+		
 		tab.cogerPuntos(posx, posy);
 		posx=nuevax;
 		posy=nuevay;
 		
 		tab.actualizarPosicion(posx, posy, " P ");
+		
+		if(!tab.comprobarEstrellas()) {
+			System.out.println("Felicidades ganaste!");
+			System.exit(0);
+		}
 		
 		
 		
