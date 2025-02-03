@@ -29,10 +29,13 @@ public class Tablero {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce dificultad 1.FACIL 2.NORMAL 3.DIFICIL");
+		System.out.println("FACIL: FANTASMAS MAS LENTOS Y 5 VIDAS");
+		System.out.println("NORMAL: FANTASMAS MEDIOS Y 3 VIDAS");
+		System.out.println("DIFICIL: FANTASMAS MAS RAPIDOS Y 2 VIDAS");
 		dificultad=sc.nextInt();
 		if(dificultad==1) {
 			Tablero tab = new Tablero(1);
-			Pac pac = new Pac(9,9,'R',tab);
+			Pac pac = new Pac(9,9,'R',tab,5);
 			Fantasma f1 = new Fantasma(7,9,tab);
 			Fantasma f2 = new Fantasma(7,10,tab);
 			Fantasma f3 = new Fantasma(7,8,tab);
@@ -61,7 +64,7 @@ public class Tablero {
 		}
 		else if(dificultad==2) {
 			Tablero tab = new Tablero(2);
-			Pac pac = new Pac(9,9,'R',tab);
+			Pac pac = new Pac(9,9,'R',tab,3);
 			Fantasma f1 = new Fantasma(7,9,tab);
 			Fantasma f2 = new Fantasma(7,10,tab);
 			Fantasma f3 = new Fantasma(7,8,tab);
@@ -88,7 +91,7 @@ public class Tablero {
 			}
 		} else if(dificultad==3) {
 			Tablero tab = new Tablero(3);
-			Pac pac = new Pac(9,9,'R',tab);
+			Pac pac = new Pac(9,9,'R',tab,2);
 			Fantasma f1 = new Fantasma(7,9,tab);
 			Fantasma f2 = new Fantasma(7,10,tab);
 			Fantasma f3 = new Fantasma(7,8,tab);

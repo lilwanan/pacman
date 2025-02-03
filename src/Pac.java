@@ -6,13 +6,15 @@ public class Pac implements Runnable {
 	private char dir; // indica la direccion en la que se va a mover
 	private Tablero tab;
 	private Semaphore semaforo;
+	private int vidas;
 	
-	public Pac(int posx, int posy, char dir, Tablero tab) {
+	public Pac(int posx, int posy, char dir, Tablero tab, int vidas) {
 		this.posx = posx;
 		this.posy = posy;
 		this.dir = dir;
 		this.tab=tab;
 		this.semaforo=tab.getSemaforo();
+		this.vidas=vidas;
 		tab.actualizarPosicion(posx, posy, " P ");
 	}
 	
@@ -21,6 +23,10 @@ public class Pac implements Runnable {
 		
 		int nuevax=posx;
 		int nuevay=posy;
+		
+		tab.actualizarPosicion(nuevax, nuevay, "   ");
+		
+		
 		
 		
 		switch(dir) {
@@ -52,15 +58,24 @@ public class Pac implements Runnable {
 		}
 		
 		if(tab.comprobarColision(nuevax, nuevay)) {
-			System.out.println("Perdiste!!");
-			System.exit(0);
+			vidas--;
+			
+			reiniciarPos();
+			
+			if(vidas==0) {
+				System.out.println("Perdiste!!");
+				System.exit(0);
+			}
+		} else {
+			tab.cogerPuntos(posx, posy);
+			posx=nuevax;
+			posy=nuevay;
+			
+			tab.actualizarPosicion(posx, posy, " P ");
 		}
 		
-		tab.cogerPuntos(posx, posy);
-		posx=nuevax;
-		posy=nuevay;
 		
-		tab.actualizarPosicion(posx, posy, " P ");
+		
 		
 		if(!tab.comprobarEstrellas()) {
 			System.out.println("Felicidades ganaste!");
@@ -71,6 +86,15 @@ public class Pac implements Runnable {
 		
 	}
 	
+	private void reiniciarPos() {
+		this.posx = 9;
+		this.posy = 9;
+		tab.actualizarPosicion(posx, posy, " P ");
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	public void cambiarDireccion(char nuevadire) {
 		if(nuevadire =='U' || nuevadire =='D' || nuevadire=='L' || nuevadire=='R' ) {
 			this.setDir(nuevadire);
@@ -124,6 +148,18 @@ public class Pac implements Runnable {
 		}
 		
 	}
+
+
+	public int getVidas() {
+		return vidas;
+	}
+
+
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
+	}
+	
+	
 	
 	
 	
